@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -Eeuxo pipefail
+
+searchpath=${2:-/sdcard/}
+adb shell "find /$searchpath -name \"$1\" -print0" | xargs -0 -n 1 adb pull
+
+# https://stackoverflow.com/questions/11074671/adb-pull-multiple-files
+# based on ishmael's answer
